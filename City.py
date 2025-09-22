@@ -48,23 +48,22 @@ class City:
                     row.append(agent)
             self.grid.append(row)
 
-    '''
-    __str__ prints the city grid as a string representation
-
-    "|" and "-|" are present in the construction of the grid   
-
-    A output string must "store" the collective strings as a whole
-
-    As the inner loop runs, the index of row (cell) is added with it's string
-
-    row_ele += adds the string to var row_ele and assigns it back to the original var
-
-    this allows for begin_str (string overall output) to assign each row_ele var on a new line after cell passes through inner loop
-
-    __str__ allows for object to inherit City class and ignore printing each row and column "manually"
-    '''
-
     def __str__(self):
+        '''
+        __str__ prints the city grid as a string representation
+
+        "|" and "-|" are present in the construction of the grid   
+
+        A output string must "store" the collective strings as a whole
+
+        As the inner loop runs, the index of row (cell) is added with it's string
+
+        row_ele += adds the string to var row_ele and assigns it back to the original var
+
+        this allows for begin_str (string overall output) to assign each row_ele var on a new line after cell passes through inner loop
+
+        __str__ allows for object to inherit City class and ignore printing each row and column "manually"
+        '''
         begin_str = ""
         for row in self.grid:
             row_ele = "|"
@@ -76,22 +75,20 @@ class City:
             begin_str += row_ele + "\n" # this is where the collective strings are "stored" as mentioned
         return begin_str
     
-    '''
-    get_neighbors locates all surrounding neighbors of agent at x,y from attributes
-
-    range(x-1, x+2) produces [x-1, x, x+1]
-
-    range(y-1, y+2) produces [y-1, y, y+1] 
-
-    where x is the row and y is the column
-
-    height and width are set with boundaries
-
-    append cells that are neighbors in the neighbors list
-
-    '''
-    
     def get_neighbors(self,x,y):
+        '''
+        get_neighbors locates all surrounding neighbors of agent at x,y from attributes
+
+        range(x-1, x+2) produces [x-1, x, x+1]
+
+        range(y-1, y+2) produces [y-1, y, y+1] 
+
+        where x is the row and y is the column
+
+        height and width are set with boundaries
+
+        append cells that are neighbors in the neighbors list
+        '''
         neighbors = []
         for i in range(x-1, x+2):
             for j in range(y-1, y+2): # this is where bounds are set for entire grid
@@ -99,24 +96,21 @@ class City:
                     if not (i == x and j == y):
                         neighbors.append((self.grid[i][j])) # append all surrounding neighbors to neighbors list
         return neighbors
-    
 
-    '''
-    move_agent was adjusted due to the removal of the random.choice
-
-    in this creative portion of the assignment, agents are moved based on a scoring metric
-
-    this give optionality for agents to make decisions
-    
-    agent.x and agent.y is the attribute from the Agent object
-
-    self.grid assigns the agent.x and agent.y (agent cell location) to empty
-
-    agents are moved to the new x,y cell
-    '''
-
-    
     def move_agent(self, agent, new_x, new_y):
+        '''
+        move_agent was adjusted due to the removal of the random.choice
+
+        in this creative portion of the assignment, agents are moved based on a scoring metric
+
+        this give optionality for agents to make decisions
+    
+        agent.x and agent.y is the attribute from the Agent object
+
+        self.grid assigns the agent.x and agent.y (agent cell location) to empty
+
+        agents are moved to the new x,y cell
+        '''
 
         self.grid[agent.x][agent.y] = None # must set cell that agent is in to empty before moving
        
@@ -126,15 +120,14 @@ class City:
 
         self.grid[new_x][new_y] = agent 
         
-    '''
-    added this method for update_move_agent in Agent.py. When is_satisfied bug was fixed, this caused an error in the update_move_agent method. 
-    
-    this is a simple method that just takes all empty cells in our grid and appends to a list called empty
-
-    get_empty_cells is used and assigned to a var in update_move_agent, this way, the choose_neighbor method can use empty cells as a potential neighbor
-
-    '''
     def get_empty_cells(self):
+        '''
+        added this method for update_move_agent in Agent.py. When is_satisfied bug was fixed, this caused an error in the update_move_agent method. 
+    
+        this is a simple method that just takes all empty cells in our grid and appends to a list called empty
+
+        get_empty_cells is used and assigned to a var in update_move_agent, this way, the choose_neighbor method can use empty cells as a potential neighbor
+        '''
         empty = []
         for i in range(self.height):
             for j in range(self.width):
@@ -142,18 +135,16 @@ class City:
                     empty.append((i, j))
         return empty # return the empty list post iteration
 
-    
-    '''
-    simulate() simulates methods of moving of agents if in the defined list, unsatisfied_agents
-
-    agents are defined as cells via self.grid[i][j]
-
-    if the agent is not None, meaning if there exists an agent, and it is unsatifsfied, append to unsatisfied list
-
-    from the list, move agents that are unsatisfied to a random cell - given from the move_agent method
-    '''
-
     def simulate(self):
+        '''
+        simulate() simulates methods of moving of agents if in the defined list, unsatisfied_agents
+
+        agents are defined as cells via self.grid[i][j]
+
+        if the agent is not None, meaning if there exists an agent, and it is unsatifsfied, append to unsatisfied list
+
+        from the list, move agents that are unsatisfied to a random cell - given from the move_agent method
+        '''
         
         for round_num in range(self.rounds):
             unsatisfied_agents = []

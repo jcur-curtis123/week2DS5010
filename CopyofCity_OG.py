@@ -1,5 +1,8 @@
 import random 
-from Agent import Agent
+from diverse import DiverseAgent
+from conform import ConformingAgent
+
+
 
 
 '''
@@ -39,7 +42,15 @@ class City:
                 if random_selection is None:
                     row.append(None) # cell is empty, append none to the cell
                 else:
-                    row.append(Agent(random_selection)) # append agent to the cell if not none
+                    if random_selection == "X":
+                        agent = DiverseAgent("X")
+                    elif random_selection == "O":
+                        agent = ConformingAgent("O")
+            
+                    agent.city = self
+                    agent.x = x
+                    agent.y = y
+                    row.append(agent)
             self.grid.append(row)
 
 
@@ -196,7 +207,7 @@ run the simulations via city_test.simulate
 '''
 
 if __name__ == "__main__":
-    city_test = City(5, 5, 100)
+    city_test = City(5, 5, 10)
     print(city_test)
     freq, avg_round = update_simulate()
     print(f"Stabilization frequency", freq)

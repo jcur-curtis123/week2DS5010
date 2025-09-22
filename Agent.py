@@ -88,17 +88,18 @@ class Agent:
 
         return best_spot
     
-    '''
-    update_move_agent is an updated verson of move_agent
-
-    new spot is a variable defined from choose_neighbor, where empty cells are potential spots
-
-    agent moves to new_x and new_y, the new spot chosen from the choose_neighbor method
-
-    if new_spot exists, continue with the move agent operation
-    '''
 
     def update_move_agent(self):
+         
+        '''
+        update_move_agent is an updated verson of move_agent
+
+        new spot is a variable defined from choose_neighbor, where empty cells are potential spots
+
+        agent moves to new_x and new_y, the new spot chosen from the choose_neighbor method
+
+        if new_spot exists, continue with the move agent operation
+        '''
         empty_cells = self.city.get_empty_cells()
         new_spot = self.choose_neighbor(empty_cells) # updated logic for new_spot where agent "chooses" cell 
         if new_spot is not None:
